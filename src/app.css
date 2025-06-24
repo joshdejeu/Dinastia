@@ -1,0 +1,167 @@
+/* src/app.css */
+
+:root {
+  /* SYSTEM (SHARED ACROSS THEMES) */
+  --header-height: 60px;
+
+  /* ===== Default Theme (Blue Inspired) ===== */
+  --bg-color: #121212;
+  /* Deep charcoal */
+  --bg-secondary-color: #1e1e1e;
+  /* Slightly lighter background for containers */
+  --text-color: #e0e0e0;
+  /* High-contrast light text */
+  --text-muted-color: #a0a0a0;
+  /* Subtle text, labels, timestamps */
+  --accent-color: #3b5998;
+  /* Muted blue */
+  --accent-hover-color: #4a6bb5;
+  /* Slightly brighter for hover/focus */
+  --border-color: #2e4679;
+  /* Deep blue-gray border */
+  --link-color: #82aaff;
+  /* Soft pastel blue */
+  --button-bg: #3b5998;
+  --button-text: #ffffff;
+  --button-hover-bg: #4a6bb5;
+
+  /* Semantic colors */
+  --success-color: #4caf50;
+  /* Muted green */
+  --error-color: #f44336;
+  /* Warm red */
+  --warning-color: #ffa726;
+  /* Soft orange */
+  --info-color: #2196f3;
+  /* Light cool blue */
+}
+
+[data-theme="theme-light"] {
+  /* ===== Light Theme (Yellow Inspired) ===== */
+  --bg-color: #f5f0d3;
+  /* Warm soft parchment */
+  --bg-secondary-color: #fff9e6;
+  /* Slightly lighter card/bg area */
+  --text-color: #3b3a1f;
+  /* Olive graphite */
+  --text-muted-color: #7c7645;
+  /* Subtle golden-brownish gray */
+  --accent-color: #f5d76e;
+  /* Golden yellow */
+  --accent-hover-color: #fbe89c;
+  /* Brighter yellow */
+  --border-color: #c9b85f;
+  /* Muted bronze */
+  --link-color: #9a832f;
+  /* Warm ochre */
+  --button-bg: #f5d76e;
+  --button-text: #3b3a1f;
+  --button-hover-bg: #fbe89c;
+
+  --success-color: #6abf69;
+  --error-color: #d94e38;
+  --warning-color: #f0a741;
+  --info-color: #2e86ab;
+}
+
+[data-theme="theme-dark"] {
+  /* ===== Dark Theme (Red Inspired) ===== */
+  --bg-color: #2c1f1f;
+  /* Deep brown-red */
+  --bg-secondary-color: #3a2a2a;
+  /* Slightly lighter for panels */
+  --text-color: #f1e7e7;
+  /* Soft white-pink */
+  --text-muted-color: #c8b3b3;
+  /* Faded rose */
+  --accent-color: #8b2e2e;
+  /* Rich crimson-red */
+  --accent-hover-color: #a03939;
+  /* Slightly brighter crimson */
+  --border-color: #5f1e1e;
+  /* Darker wine border */
+  --link-color: #d97d7d;
+  /* Rosewood highlight */
+  --button-bg: #8b2e2e;
+  --button-text: #fff0f0;
+  --button-hover-bg: #a03939;
+
+  --success-color: #6dbf7a;
+  --error-color: #ff6961;
+  --warning-color: #ffb347;
+  --info-color: #a3bfff;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+}
+
+html,
+body,
+#svelte {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+header,
+footer {
+  border-color: var(--border-color);
+  background-color: var(--accent-color);
+  padding: 1rem;
+  color: var(--button-text);
+}
+
+button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+button:hover {
+  background-color: var(--button-hover-bg);
+  border-color: var(--accent-hover-color);
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px dashed var(--accent-hover-color);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.card {
+  background-color: var(--bg-secondary-color);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  border-radius: 10px;
+  color: var(--text-color);
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+
+h1 {
+  color: var(--text-color);
+}
+
