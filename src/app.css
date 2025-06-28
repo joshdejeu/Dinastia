@@ -5,7 +5,22 @@
   --header-height: 60px;
 
   /* ===== Default Theme (Blue Inspired) ===== */
+  --bg-darkest: #080808;
+  /* Pure near-black */
+  --bg-darker: #0e0e0e;
+  /* Deep charcoal, darker than bg */
+  --bg-dark: #101010;
+  /* Slightly lighter than darker */
+
   --bg-color: #121212;
+  /* Current bg-color (kept for ref) */
+
+  --bg-light: #181818;
+  /* Just lighter than bg-color */
+  --bg-lighter: #1e1e1e;
+  /* Current secondary */
+  --bg-lightest: #262626;
+  /* Soft dark-gray panel */
   /* Deep charcoal */
   --bg-secondary-color: #1e1e1e;
   /* Slightly lighter background for containers */
@@ -20,6 +35,8 @@
   --border-color: #2e4679;
   /* Deep blue-gray border */
   --link-color: #82aaff;
+  /* Default Theme: brighter pastel blue */
+  --link-hover-color: #a3c0ff;
   /* Soft pastel blue */
   --button-bg: #3b5998;
   --button-text: #ffffff;
@@ -37,26 +54,45 @@
 }
 
 [data-theme="theme-light"] {
-  /* ===== Light Theme (Yellow Inspired) ===== */
-  --bg-color: #f5f0d3;
-  /* Warm soft parchment */
-  --bg-secondary-color: #fff9e6;
-  /* Slightly lighter card/bg area */
-  --text-color: #3b3a1f;
-  /* Olive graphite */
-  --text-muted-color: #7c7645;
-  /* Subtle golden-brownish gray */
-  --accent-color: #f5d76e;
-  /* Golden yellow */
-  --accent-hover-color: #fbe89c;
-  /* Brighter yellow */
-  --border-color: #c9b85f;
-  /* Muted bronze */
-  --link-color: #9a832f;
-  /* Warm ochre */
-  --button-bg: #f5d76e;
-  --button-text: #3b3a1f;
-  --button-hover-bg: #fbe89c;
+  --bg-darkest: #d6cc9a;
+  /* softer warm khaki */
+  --bg-darker: #ede7c8;
+  /* pale straw */
+  --bg-dark: #f8f6de;
+  /* very light cream */
+  --bg-color: #fffcee;
+  /* almost white with slight warmth */
+  --bg-light: #fffef5;
+  /* off-white parchment */
+  --bg-lighter: #fffffb;
+  /* nearly pure white */
+  --bg-lightest: #ffffff;
+  /* pure white */
+
+  --bg-secondary-color: #fffef5;
+  /* light card background */
+
+  --text-color: #5a5236;
+  /* soft dark golden brown */
+  --text-muted-color: #93885e;
+  /* warm grayish gold */
+
+  --accent-color: #f4d06f;
+  /* sunflower yellow */
+  --accent-hover-color: #f7df9c;
+  /* pale yellow */
+
+  --border-color: #cdb85a;
+  /* muted gold */
+
+  --link-color: #a38d3f;
+  /* earthy ochre */
+  --link-hover-color: #c0aa57;
+  /* Light Theme: lighter ochre */
+
+  --button-bg: #f4d06f;
+  --button-text: #5a5236;
+  --button-hover-bg: #f7df9c;
 
   --success-color: #6abf69;
   --error-color: #d94e38;
@@ -64,9 +100,25 @@
   --info-color: #2e86ab;
 }
 
+
 [data-theme="theme-dark"] {
   /* ===== Dark Theme (Red Inspired) ===== */
+  --bg-darkest: #120a0a;
+  /* Deep wine-black */
+  --bg-darker: #1b1212;
+  /* Dark mahogany */
+  --bg-dark: #241818;
+  /* Between mahogany and default bg */
+
   --bg-color: #2c1f1f;
+  /* Current bg-color */
+
+  --bg-light: #342525;
+  /* Slightly lighter than bg-color */
+  --bg-lighter: #3a2a2a;
+  /* Current secondary */
+  --bg-lightest: #483737;
+  /* Muted rosewood panel */
   /* Deep brown-red */
   --bg-secondary-color: #3a2a2a;
   /* Slightly lighter for panels */
@@ -81,6 +133,9 @@
   --border-color: #5f1e1e;
   /* Darker wine border */
   --link-color: #d97d7d;
+  /* Dark Theme: softened rose */
+  --link-hover-color: #ef9f9f;
+
   /* Rosewood highlight */
   --button-bg: #8b2e2e;
   --button-text: #fff0f0;
@@ -153,7 +208,7 @@ button:disabled {
 
 a {
   color: var(--link-color);
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a:hover {
@@ -164,4 +219,3 @@ a:hover {
 h1 {
   color: var(--text-color);
 }
-

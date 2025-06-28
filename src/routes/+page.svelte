@@ -1,8 +1,8 @@
 <!-- src/routes/+page.svelte -->
-
+<!-- the home page -->
 <script>
   const routes = [
-    { label: "Family Tree", href: "/tree" },
+    { label: "Explore", href: "/explore/web" },
     { label: "Color Theme", href: "/theme" },
     { label: "Upload GEDCOM", href: "/upload" },
   ];
@@ -30,20 +30,21 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    align-items: center;
+    gap: 2rem;
     width: 100%;
-    max-width: 900px;
+    height: 70%;
   }
 
   .button-tile {
     display: flex;
     align-items: center;
     justify-content: center;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 2;
     width: 100%;
-    max-width: 280px;
-    background-color: #4fc3f7;
-    color: #121212;
+    max-width: 240px;
+    background-color: var(--bg-lighter);
+    color: var(--text-color);
     text-decoration: none;
     font-weight: bold;
     font-size: 1.25rem;
@@ -54,7 +55,7 @@
   }
 
   .button-tile:hover {
-    background-color: #29b6f6;
+    background-color: var(--bg-lightest);
   }
 
   @media (max-width: 768px) {

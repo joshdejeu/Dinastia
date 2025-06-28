@@ -1,7 +1,7 @@
 // src/lib/buildTree.js
 // Transforms GEDCOM into nested D3 tree
 
-export function buildTree({ people, families, rootId }) {
+export function buildTree(people, families, rootId) {
     // console.log(people, families, rootId);
     const seen = new Set();
 

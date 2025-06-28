@@ -12,10 +12,11 @@
 
 <main>
     <div class="upload-backplate">
-        <h1>Dinastia Upload GEDCOM</h1>
+        <h1>Upload GEDCOM</h1>
         <p>
-            Made for Ancestry.com 6-23-2025 which supports
+            Made for Ancestry.com (6-23-25) which supports
             <a
+                style="text-decoration: underline;"
                 target="_blank"
                 href="https://gedcom.io/specifications/ged551.pdf"
                 ><strong>GEDCOM 5.5.1</strong>
@@ -56,6 +57,7 @@
         padding: 2rem;
         margin-top: 2rem;
         border-radius: 1em;
+        border: 1px solid var(--text-color);
     }
 
     .file-upload {

@@ -7,6 +7,11 @@
  * @param {string} gedcomText - raw GEDCOM file content (UTF‑8)
  * @returns {{ people: Object, families: Object, rootId: string|null }}
  */
+// OLD use case (birth dates wouldn't appear correctly)
+        // parsedData = parseGedcom(gedcomText); // Returns { people, families, root_id }
+
+
+        // help online https://github.com/oh-kay-blanket/gedcom-d3/blob/master/index.js
 export function parseGedcom(gedcomText) {
     const lines = gedcomText.split(/\r?\n/);
     const people = {}, families = {};
