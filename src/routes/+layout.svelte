@@ -4,6 +4,9 @@
     import "../app.css";
     import { onMount } from "svelte";
     import { menu_items } from "$lib/menuItems.js";
+    import { initSettingsFromMenu } from "$lib/util/initSettings";
+    initSettingsFromMenu();
+
     let showExplore = false;
 
     const DEFAULT_THEME = "theme-default";

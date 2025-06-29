@@ -1,17 +1,13 @@
 <!-- src/routes/+page.svelte -->
 <!-- the home page -->
 <script>
-  const routes = [
-    { label: "Explore", href: "/explore/web" },
-    { label: "Color Theme", href: "/theme" },
-    { label: "Upload GEDCOM", href: "/upload" },
-  ];
+  import { menu_items } from "$lib/menuItems.js";
 </script>
 
 <main>
   <div class="button-grid">
-    {#each routes as { label, href }}
-      <a class="button-tile" {href}>{label}</a>
+    {#each menu_items as { name, route }}
+      <a class="button-tile" href={route}>{name}</a>
     {/each}
   </div>
 </main>

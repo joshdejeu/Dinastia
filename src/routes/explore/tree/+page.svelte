@@ -10,5 +10,5 @@
 {#if treeData}
     <TreeView {treeData} />
 {:else}
-    <p>Loading...</p>
+    <p class="loading-view">Loading...</p>
 {/if}

@@ -1,11 +1,24 @@
 <!-- src/routes/tree/+layout.svelte -->
 <!-- loads file and renders tree -->
-
 <script>
+    import { onMount, onDestroy } from "svelte";
+    import { globalSettingsStore } from "$lib/stores";
     import { page } from "$app/stores";
     import { menu_items } from "$lib/menuItems.js";
+    import ExploreViewSettings from "./ExploreViewSettings.svelte";
+
     const exploreMenu =
         menu_items.find((item) => item.name === "Explore")?.children ?? [];
+
+    // Reactive values
+    $: currentPath = $page.url.pathname;
+    $: activeExploreItem = exploreMenu.find(
+        (item) => item.route === currentPath,
+    );
+    // Grab the settings for this current route (if any)
+    $: settingsExistForThisRoute = exploreMenu.find(
+        (explore) => explore?.route === currentPath,
+    )?.settings;
 
     // import { buildTree } from "$lib/buildTree";
     export let data;
@@ -45,6 +58,33 @@
             isFullscreen = false;
         }
     }
+
+    function handleFullscreenChange() {
+        const nowFull = !!document.fullscreenElement;
+        if (!nowFull && isFullscreen) {
+            // Trigger your custom fullscreen exit animation logic
+            isAnimatingExit = true;
+            isFullscreen = false;
+        }
+    }
+
+    onMount(() => {
+        if (typeof document !== "undefined") {
+            document.addEventListener(
+                "fullscreenchange",
+                handleFullscreenChange,
+            );
+        }
+    });
+
+    onDestroy(() => {
+        if (typeof document !== "undefined") {
+            document.removeEventListener(
+                "fullscreenchange",
+                handleFullscreenChange,
+            );
+        }
+    });
 </script>
 
 <!-- Select tree-view and render that component -->
@@ -118,7 +158,11 @@
                     </div>
                 </div>
                 <div class="tree-container">
-                    <!-- <TreeView {treeData} rootId={firstIndi} /> -->
+                    {#if settingsExistForThisRoute}
+                        <ExploreViewSettings
+                            settings={settingsExistForThisRoute}
+                        />
+                    {/if}
                     <slot />
                 </div>
             </div>
@@ -201,6 +245,7 @@
         gap: 1rem;
     }
     .tree-container {
+        position: relative;
         width: calc(100% - 1rem); /* full width minus horizontal margin */
         /* top | right | bottom | left */
         margin: 0 auto 0.5rem auto; /* vertical + centered horizontal margin */

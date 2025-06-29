@@ -51,6 +51,15 @@
   /* Soft orange */
   --info-color: #2196f3;
   /* Light cool blue */
+
+  --toggle-on-bg: #3b5998;
+  /* muted blue */
+  --toggle-on-knob: #ffffff;
+  /* white knob */
+  --toggle-off-bg: #262626;
+  /* soft dark-gray panel */
+  --toggle-off-knob: #121212;
+  /* current bg-color */
 }
 
 [data-theme="theme-light"] {
@@ -98,6 +107,15 @@
   --error-color: #d94e38;
   --warning-color: #f0a741;
   --info-color: #2e86ab;
+
+  --toggle-on-bg: #f4d06f;
+  /* sunflower yellow */
+  --toggle-on-knob: #5a5236;
+  /* soft dark golden brown */
+  --toggle-off-bg: #ffffff;
+  /* pure white */
+  --toggle-off-knob: #ede7c8;
+  /* pale straw */
 }
 
 
@@ -145,6 +163,15 @@
   --error-color: #ff6961;
   --warning-color: #ffb347;
   --info-color: #a3bfff;
+
+  --toggle-on-bg: #8b2e2e;
+  /* rich crimson-red */
+  --toggle-on-knob: #fff0f0;
+  /* soft white-pink */
+  --toggle-off-bg: #483737;
+  /* muted rosewood panel */
+  --toggle-off-knob: #2c1f1f;
+  /* current bg-color */
 }
 
 body {
@@ -218,4 +245,11 @@ a:hover {
 
 h1 {
   color: var(--text-color);
+}
+
+
+.loading-view {
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
