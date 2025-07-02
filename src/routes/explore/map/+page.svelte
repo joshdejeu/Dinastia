@@ -3,7 +3,8 @@
     import { page } from "$app/stores";
     import Map3DView from "./Map3DView.svelte";
 
-    $: treeData = $page.data.d3Data;
+    export let data;
+    const { treeData } = data;
 
     // import { GedcomGeoHelper } from "$lib/extractLocation";
     // let people = [];

@@ -1,10 +1,11 @@
 <!-- src/routes/tree/family/+page.svelte -->
 <script>
-    import { page } from "$app/stores";
+    export let data;
+    const { treeData } = data;
 
     import TreeView from "./TreeView.svelte";
     // Access layout-provided data reactively
-    $: treeData = $page.data.d3Data;
+    console.log(treeData);
 </script>
 
 {#if treeData}

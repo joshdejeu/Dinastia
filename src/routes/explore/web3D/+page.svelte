@@ -2,7 +2,8 @@
     import { page } from "$app/stores";
     import Graph3DView from "./Graph3DView.svelte";
 
-    $: treeData = $page.data.d3Data;
+    export let data;
+    const { treeData } = data;
 </script>
 
 {#if treeData}

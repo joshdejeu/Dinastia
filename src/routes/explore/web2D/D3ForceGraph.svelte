@@ -1,7 +1,7 @@
 <!-- src\routes\explore\web\D3ForceGraph.svelte -->
 <script>
     import { onMount, onDestroy } from "svelte";
-    import { globalSettingsStore } from "$lib/stores";
+    import { globalSettingsStore } from "$lib/stores.js";
     let d3;
 
     export let nodes = [];

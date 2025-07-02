@@ -2,9 +2,10 @@
 <!-- D3-powered component -->
 
 <script>
-    import { onMount, onDestroy } from "svelte";
+    import { mount, onMount, onDestroy } from "svelte";
     import * as d3 from "d3";
     import { FamilyTreeBuilder } from "./FamilyTreeBuilder";
+    import PersonCard from "./PersonCard.svelte";
 
     export let treeData;
 
@@ -36,9 +37,16 @@
 
         svg.call(zoom);
 
-        const layout = d3.tree().size([height - 80, width - 80]);
+        // const layout = d3.tree().size([height - 80, width - 80]); horiztonal
+        const layout = d3.tree().size([width - 80, height - 80]);
         const rootHierarchy = d3.hierarchy(rootData);
         layout(rootHierarchy);
+
+        // Flip Y axis for upward growth:
+        const totalHeight = height - 80;
+        rootHierarchy.each((d) => {
+            d.y = totalHeight - d.y;
+        });
 
         // Links
         g.selectAll(".link")
@@ -52,9 +60,12 @@
             .attr(
                 "d",
                 d3
-                    .linkHorizontal()
-                    .x((d) => d.y)
-                    .y((d) => d.x),
+                    //     .linkHorizontal()
+                    //     .x((d) => d.y)
+                    //     .y((d) => d.x),
+                    .linkVertical()
+                    .x((d) => d.x)
+                    .y((d) => d.y),
             );
 
         // Nodes
@@ -62,18 +73,45 @@
             .selectAll(".node")
             .data(rootHierarchy.descendants())
             .enter()
-            .append("g")
-            .attr("class", "node")
-            .attr("transform", (d) => `translate(${d.y},${d.x})`);
+            .append("foreignObject")
+            // .attr("x", (d) => d.y - 50) // center card horizontally
+            // .attr("y", (d) => d.x - 15) // center card vertically
+            .attr("x", (d) => d.x - 45)
+            .attr("y", (d) => d.y - 10)
+            .attr("width", 150)
+            .attr("height", 50)
+            .attr("class", "tree_node");
+        //     .selectAll(".node")
+        //     .data(rootHierarchy.descendants())
+        //     .enter()
+        //     .append("g")
+        //     .attr("class", "node")
+        //     .attr("transform", (d) => `translate(${d.y},${d.x})`);
 
-        node.append("circle").attr("r", 5).attr("fill", "var(--accent-color)");
+        // node.append("circle").attr("r", 5).attr("fill", "var(--accent-color)");
 
-        node.append("text")
-            .text((d) => d.data.name)
-            .attr("x", "-3em")
-            .attr("dy", "-0.75em")
-            .attr("fill", "var(--text-color)")
-            .style("font", "12px sans-serif");
+        // node.append("text")
+        //     .text((d) => d.data.name)
+        //     .attr("x", "-3em")
+        //     .attr("dy", "-0.75em")
+        //     .attr("fill", "var(--text-color)")
+        //     .style("font", "12px sans-serif");
+
+        node.each(function (d) {
+            const wrapper = document.createElement("div");
+            wrapper.style.width = "fit-content";
+            wrapper.style.height = "fit-content";
+
+            mount(PersonCard, {
+                target: wrapper,
+                props: {
+                    person: d.data,
+                    selected: d.data.selected || false,
+                },
+            });
+
+            this.appendChild(wrapper);
+        });
     }
 
     onMount(() => {
@@ -138,5 +176,10 @@
         background-color: var(--bg-color);
         filter: none;
         cursor: default;
+    }
+    :global(.tree_node) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>

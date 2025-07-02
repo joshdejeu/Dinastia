@@ -16,23 +16,46 @@ export const menu_items = [
                     },
                 ]
             },
-            { name: "Family Tree", route: "/explore/tree" },
+            {
+                name: "Family Tree", route: "/explore/tree", 
+                // settings: [
+                //     {
+                //         name: "Vertical",
+                //         value: true,
+                //     },
+                //     {
+                //         name: "Horizontal",
+                //         value: false,
+                //     },
+                // ]
+            },
             { name: "Timeline", route: "/explore/timeline" },
             {
                 name: "Geo Map", route: "/explore/map",
                 settings: [
                     {
-                        name: "Day Time",
+                        name: "Stars",
+                        value: false,
+                    },
+                    {
+                        name: "Day/Night Cycle",
+                        value: false,
+                    },
+                    {
+                        name: "Static Light Mode",
                         value: true,
-                        data: "//unpkg.com/three-globe/example/img/earth-day.jpg",
                     },
                     {
-                        name: "Clouds",
+                        name: "Cloud Overlay",
                         value: false,
                     },
                     {
-                        name: "Auto Spin",
+                        name: "Auto-Rotate",
                         value: false,
+                    },
+                    {
+                        name: "Arcs",
+                        value: true,
                     },
                 ]
             },

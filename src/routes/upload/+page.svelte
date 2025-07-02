@@ -1,12 +1,30 @@
 <script>
+    import { gedcomFile, gedcomText } from "$lib/stores/gedcom.js";
+    import { goto } from "$app/navigation";
+
     let file;
 
     function handleFileChange(event) {
         file = event.target.files[0];
         if (file) {
-            // Placeholder: here you'll add GEDCOM parsing and tree building
-            console.log("File selected:", file.name);
+            gedcomFile.set(file);
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                gedcomText.set(e.target.result);
+                console.log("GEDCOM text loaded");
+            };
+            reader.readAsText(file);
         }
+    }
+
+    function handleParse() {
+        // file is already stored and gedcomText is set
+        // now do parsing or navigation
+        // alert("Parsing will happen here soon!");
+        // You can also navigate to /tree here if needed:
+        // import { goto } from '$app/navigation'; then:
+        goto("/explore/tree");
     }
 </script>
 
@@ -33,9 +51,7 @@
 
     {#if file}
         <p>Selected file: <strong>{file.name}</strong></p>
-        <button on:click={() => alert("Parsing will happen here soon!")}>
-            Parse & Build Tree
-        </button>
+        <button on:click={handleParse}> Parse & Build Tree </button>
     {/if}
 </main>
 

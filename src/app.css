@@ -60,6 +60,10 @@
   /* soft dark-gray panel */
   --toggle-off-knob: #121212;
   /* current bg-color */
+  --person-male-color: #3b5998;
+  /* muted blue */
+  --person-female-color: #d47ba3;
+  /* muted pink */
 }
 
 [data-theme="theme-light"] {
@@ -116,6 +120,10 @@
   /* pure white */
   --toggle-off-knob: #ede7c8;
   /* pale straw */
+  --person-male-color: #a38d3f;
+  /* ochre brown */
+  --person-female-color: #d66c85;
+  /* dusty rose */
 }
 
 
@@ -172,6 +180,10 @@
   /* muted rosewood panel */
   --toggle-off-knob: #2c1f1f;
   /* current bg-color */
+  --person-male-color: #8b2e2e;
+  /* crimson */
+  --person-female-color: #c4748b;
+  /* muted mauve */
 }
 
 body {
@@ -252,4 +264,7 @@ h1 {
   position: relative;
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

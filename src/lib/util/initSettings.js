@@ -1,5 +1,5 @@
 // src/lib/utils/initSettings.js
-import { globalSettingsStore } from "$lib/stores";
+import { globalSettingsStore } from "$lib/stores.js";
 import { menu_items } from "$lib/menuItems.js";
 
 export function initSettingsFromMenu() {

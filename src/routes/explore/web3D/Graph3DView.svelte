@@ -8,6 +8,16 @@
     let Graph;
     let resizeObserver;
 
+    const bgColor = getComputedStyle(document.documentElement).getPropertyValue(
+        "--bg-color",
+    );
+    // .trim();
+
+    const linkColor = getComputedStyle(
+        document.documentElement,
+    ).getPropertyValue("--text-color");
+    // .trim();
+
     onMount(async () => {
         const ForceGraph3D = (await import("3d-force-graph")).default;
         const THREE = await import("three");
@@ -25,11 +35,9 @@
                 );
                 sprite.scale.set(8, 8, 1);
                 return sprite;
-            });
+            })
+            .linkColor((link) => linkColor);
 
-        const bgColor = getComputedStyle(document.documentElement)
-            .getPropertyValue("--bg-color")
-            .trim();
         Graph.backgroundColor(bgColor);
 
         function resize() {

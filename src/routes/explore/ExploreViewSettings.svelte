@@ -1,28 +1,13 @@
 <!-- src\routes\explore\ExploreViewSettings.svelte -->
 <script>
-    import { globalSettingsStore } from "$lib/stores";
+    import { globalSettingsStore, updateSetting } from "$lib/stores.js";
     import { writable } from "svelte/store";
 
     export let settings;
 
     // Toggle the setting that was clicked
     function toggleSetting(setting) {
-        const name = setting.name;
-        globalSettingsStore.update((store) => {
-            if (store[name]) {
-                store[name].value = !store[name].value;
-            }
-            return store;
-        });
-        // Update local settings array directly so UI reflects immediately
-        const index = settings.findIndex((s) => s.name === name);
-        if (index !== -1) {
-            // toggle the value in local array (this is NOT reactive but triggers update)
-            settings[index].value = !settings[index].value;
-
-            // force Svelte to notice the change by creating a new array reference
-            settings = [...settings];
-        }
+        updateSetting(setting.name);
     }
 
     let isMenuExpanded = false;

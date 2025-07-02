@@ -1,36 +1,79 @@
 <!-- src/routes/tree/+layout.svelte -->
 <!-- loads file and renders tree -->
 <script>
-    import { onMount, onDestroy } from "svelte";
-    import { globalSettingsStore } from "$lib/stores";
-    import { page } from "$app/stores";
-    import { menu_items } from "$lib/menuItems.js";
-    import ExploreViewSettings from "./ExploreViewSettings.svelte";
+    import { gedcomText } from "$lib/stores/gedcom.js";
+    import { goto } from "$app/navigation";
 
-    const exploreMenu =
+    import { onMount, onDestroy } from "svelte";
+    import { SettingsManager } from "$lib/SettingsManager.js";
+    import { page } from "$app/stores";
+    import { parse } from "gedcom-d3";
+    import { d3ize } from "$lib/d3ize";
+    let treeData = null;
+    let loading = true;
+
+    import ExploreViewSettings from "./ExploreViewSettings.svelte";
+    import { globalSettingsStore, initGlobalSettings } from "$lib/stores.js";
+    import { derived, get } from "svelte/store";
+    import { menu_items } from "$lib/menuItems.js";
+
+    onMount(() => {
+        const raw = $gedcomText; // reactive subscription
+        if (!raw) {
+            // redirect or show error
+            loading = false;
+            return;
+        }
+        try {
+            const parsed = parse(raw);
+            treeData = d3ize(parsed);
+        } catch (e) {
+            console.error("Failed parsing", e);
+        }
+        loading = false;
+    });
+
+    // 1. Grab the settings from menu_items for current route
+    $: currentPath = $page.url.pathname;
+    $: exploreMenu =
         menu_items.find((item) => item.name === "Explore")?.children ?? [];
 
-    // Reactive values
-    $: currentPath = $page.url.pathname;
     $: activeExploreItem = exploreMenu.find(
         (item) => item.route === currentPath,
     );
-    // Grab the settings for this current route (if any)
-    $: settingsExistForThisRoute = exploreMenu.find(
-        (explore) => explore?.route === currentPath,
-    )?.settings;
+    $: routeSettings = activeExploreItem?.settings ?? [];
+
+    let routeSettingsList;
+
+    // Reactively update route-specific settings when path changes
+    $: if (routeSettings.length > 0) {
+        initGlobalSettings(routeSettings);
+
+        // Recompute settingsList derived from global store using current route's keys
+        routeSettingsList = derived(globalSettingsStore, ($store) =>
+            routeSettings.map((s) => ({
+                name: s.name,
+                value: $store[s.name]?.value ?? s.value,
+            })),
+        );
+    } else {
+        routeSettingsList = null;
+    }
 
     // import { buildTree } from "$lib/buildTree";
-    export let data;
-    const { d3Data, firstIndi } = data;
+    // export let data;
+    // const { d3Data, firstIndi } = data;
+    // let debug = false; // Set to true to see raw tree data, false to see the rendered tree
+    // let isFullscreen = false;
+    // let rect = { top: 0, left: 0, width: 0, height: 0 };
+    // let fullScreenEl;
+    // Track if we're animating exit fullscreen
+    // let isAnimatingExit = false;
 
-    let debug = false; // Set to true to see raw tree data, false to see the rendered tree
+    let debug = false;
     let isFullscreen = false;
-
     let rect = { top: 0, left: 0, width: 0, height: 0 };
     let fullScreenEl;
-
-    // Track if we're animating exit fullscreen
     let isAnimatingExit = false;
 
     function toggleFullscreen() {
@@ -75,6 +118,7 @@
                 handleFullscreenChange,
             );
         }
+        loading = false;
     });
 
     onDestroy(() => {
@@ -90,7 +134,13 @@
 <!-- Select tree-view and render that component -->
 <main>
     <div class="tree-wrapper">
-        {#if d3Data && !debug}
+        {#if loading}
+            <p
+                style="display: flex; justify-content: center; align-items: center;"
+            >
+                Loading tree...
+            </p>
+        {:else if treeData && !debug}
             <div
                 bind:this={fullScreenEl}
                 class="laravel-shadow"
@@ -158,18 +208,27 @@
                     </div>
                 </div>
                 <div class="tree-container">
-                    {#if settingsExistForThisRoute}
-                        <ExploreViewSettings
-                            settings={settingsExistForThisRoute}
-                        />
+                    {#if routeSettingsList}
+                        <ExploreViewSettings settings={$routeSettingsList} />
                     {/if}
-                    <slot />
+                    {#if treeData}
+                        <slot {treeData} />
+                    {:else}
+                        <p>Loading tree...</p>
+                    {/if}
                 </div>
             </div>
-        {:else if debug && parsedData}
+        {:else if debug}
             <h1>Debug mode</h1>
-            <p>Parsed GEDCOM people data:</p>
-            <!-- <pre>{JSON.stringify(parsedData.people, null, 2)}</pre> -->
+            <p>Parsed GEDCOM data:</p>
+            <div style="position: relative; display: flex">
+                <pre
+                    style="max-width: 80vw; max-height: 50vh; overflow: auto; position: relative;">{JSON.stringify(
+                        treeData,
+                        null,
+                        2,
+                    )}</pre>
+            </div>
         {:else}
             <p>Loading tree...</p>
         {/if}
