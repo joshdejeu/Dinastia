@@ -140,4 +140,13 @@
         background-color: #8b2e2e; /* Deep dark red */
         --border-color: #5f1e1e;
     }
+
+    @media (max-width: 600px) {
+        .theme-container {
+            max-width: 100vw;
+            height: fit-content;
+            max-height: 90vh;
+            flex-direction: column;
+        }
+    }
 </style>

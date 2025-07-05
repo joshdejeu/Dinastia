@@ -1,6 +1,7 @@
 <script>
     import { gedcomFile, gedcomText } from "$lib/stores/gedcom.js";
     import { goto } from "$app/navigation";
+    import SampleData from "./SampleData.svelte";
 
     let file;
 
@@ -24,7 +25,7 @@
         // alert("Parsing will happen here soon!");
         // You can also navigate to /tree here if needed:
         // import { goto } from '$app/navigation'; then:
-        goto("/explore/tree");
+        // goto("/explore/tree");
     }
 </script>
 
@@ -53,6 +54,7 @@
         <p>Selected file: <strong>{file.name}</strong></p>
         <button on:click={handleParse}> Parse & Build Tree </button>
     {/if}
+    <SampleData />
 </main>
 
 <style>
@@ -105,5 +107,35 @@
         font-weight: bold;
         cursor: pointer;
         transition: background-color 0.25s ease;
+    }
+
+    @media (max-width: 600px) {
+        main {
+            margin: 3em; /* reduce outer margin for small screens */
+            max-width: 100%;
+            font-size: 0.7rem;
+        }
+
+        .upload-backplate {
+            padding: 1rem 1.25rem; /* smaller padding */
+            margin-top: 1rem; /* reduce vertical spacing */
+            border-radius: 0.75em; /* slightly smaller rounding */
+        }
+
+        .file-upload {
+            font-size: 0.9rem; /* slightly smaller input text */
+            padding: 0.75rem; /* less padding */
+        }
+
+        button {
+            padding: 0.5rem 1.5rem; /* smaller clickable button */
+            font-size: 0.9rem;
+        }
+
+        p {
+            font-size: 0.8rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
     }
 </style>

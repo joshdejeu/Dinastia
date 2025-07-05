@@ -22,6 +22,7 @@
         if (!raw) {
             // redirect or show error
             loading = false;
+            goto("/upload"); // navigate to the upload page
             return;
         }
         try {
@@ -372,6 +373,15 @@
             width: var(--start-width);
             height: var(--start-height);
             border-radius: 1rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .tree-menu {
+            padding: 0 1em;
+            .tree-menu-item {
+                font-size: 0.65rem;
+            }
         }
     }
 </style>

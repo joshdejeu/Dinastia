@@ -1,0 +1,5 @@
+name = "dinastia"
+compatibility_date = "2025-07-02"
+
+[build]
+command = "npm run build"

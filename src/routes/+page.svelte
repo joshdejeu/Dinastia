@@ -56,12 +56,15 @@
 
   @media (max-width: 768px) {
     .button-grid {
+      width: 100vw;
       flex-direction: column;
       align-items: center;
+      flex-wrap: nowrap;
     }
 
     .button-tile {
-      max-width: 90%;
+      max-width: 50%;
+      font-size: 0.8rem;
     }
   }
 </style>

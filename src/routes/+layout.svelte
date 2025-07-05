@@ -130,4 +130,59 @@
         text-decoration: none !important;
         color: var(--link-hover-color);
     }
+
+    @media (max-width: 600px) {
+        .site-header {
+            height: auto;
+            padding: 0.75rem 1rem;
+        }
+
+        .site-header h1 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .site-header nav {
+            margin-top: 0;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+
+        .site-header nav a,
+        .nav-drop-down {
+            font-size: 0.875rem; /* smaller font */
+            white-space: normal; /* allow wrapping if needed */
+            padding: 0.25rem 0.5rem;
+        }
+
+        /* Make nav a bit taller and easier to tap on mobile */
+        .nav-drop-down {
+            padding: 0.25rem 0.5rem;
+        }
+
+        /* Dropdown menu full width, below button, and better for touch */
+        .dropdown-menu {
+            position: static; /* flow naturally below */
+            transform: none;
+            box-shadow: none;
+            border-radius: 0;
+            border: none;
+            background-color: transparent;
+            padding: 0;
+            min-width: 100%; /* full container width */
+            flex-direction: column;
+        }
+
+        .dropdown-menu a {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--bg-lightest, #ccc);
+            white-space: normal;
+            text-align: center;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+    }
 </style>
