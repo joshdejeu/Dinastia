@@ -3,7 +3,7 @@
     import { goto } from "$app/navigation";
     import { onMount } from "svelte";
 
-    let useSampleData = true;
+    let useSampleData = false;
     let loading = false;
 
     // Whenever useSampleData changes to true, fetch and load the sample file
