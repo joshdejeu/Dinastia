@@ -10,9 +10,15 @@ export class SettingsManager {
 
     static set(name, value) {
         globalSettingsStore.update((store) => {
-            if (store[name]) {
+            if (!store[name]) return store;
+
+            // Example: prevent accidental array operations
+            if (Array.isArray(store[name].value) && Array.isArray(value)) {
+                store[name].value = [...value];
+            } else {
                 store[name].value = value;
             }
+
             return store;
         });
     }
@@ -26,13 +32,27 @@ export class SettingsManager {
         });
     }
 
-    static subscribe(name, callback) {
+    // static subscribe(name, callback) {
+    //     return globalSettingsStore.subscribe(($store) => {
+    //         if (name in $store) {
+    //             callback($store[name].value);
+    //         }
+    //     });
+    // }
+
+    static subscribe(name, callback, { skipInitial = false } = {}) {
+        let firstRun = true;
         return globalSettingsStore.subscribe(($store) => {
             if (name in $store) {
+                if (skipInitial && firstRun) {
+                    firstRun = false;
+                    return;
+                }
                 callback($store[name].value);
             }
         });
     }
+
 
     // Advanced: handle exclusives here too
     static setExclusive(name, value) {
