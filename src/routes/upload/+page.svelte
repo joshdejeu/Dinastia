@@ -25,7 +25,7 @@
         // alert("Parsing will happen here soon!");
         // You can also navigate to /tree here if needed:
         // import { goto } from '$app/navigation'; then:
-        // goto("/explore/tree");
+        goto("/explore/tree");
     }
 </script>
 
@@ -125,6 +125,7 @@
         .file-upload {
             font-size: 0.9rem; /* slightly smaller input text */
             padding: 0.75rem; /* less padding */
+            max-width: 70vw !important;
         }
 
         button {

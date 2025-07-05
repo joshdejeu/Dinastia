@@ -3,7 +3,7 @@
     import { goto } from "$app/navigation";
     import { onMount } from "svelte";
 
-    let useSampleData = false;
+    let useSampleData = true;
     let loading = false;
 
     // Whenever useSampleData changes to true, fetch and load the sample file
@@ -65,24 +65,71 @@
     {#if loading}
         <p>Loading file contents...</p>
     {:else if useSampleData && $gedcomText}
-        <h2 style="text-align: center;">
-            Sample Family Tree: English and British Monarchs
-        </h2>
         <div
             style="display: flex; justify-content: center; align-items: center;"
         >
             <button on:click={navigateToExplore}>Let's explore!</button>
         </div>
-        <div style="position: relative; display: flex">
-            <pre
-                style="max-width: 50vw; max-height: 40vh; overflow: auto; position: relative;">
-{$gedcomText}
-      </pre>
+        <div
+            class="laravel-container"
+            style="position: relative; display: flex; padding: 2rem"
+        >
+            <div class="laravel-outer">
+                <div>
+                    <div class="laravel-title">
+                        Sample Family Tree: English and British Monarchs
+                    </div>
+                </div>
+                <div class="laravel-inner">
+                    <pre
+                        style="max-width: 50vw; max-height: 40vh; overflow: auto; position: relative;">
+                    {$gedcomText}
+                </pre>
+                </div>
+            </div>
         </div>
     {/if}
 </main>
 
 <style>
+    .laravel-outer {
+        position: relative;
+        width: 100%;
+        /* height: 80%; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 1rem;
+        box-shadow: 0px 0px 0px 10px var(--bg-lightest);
+        /* background-color: var(--bg-color); */
+        background-color: var(--bg-darkest);
+    }
+    .laravel-title {
+        width: 100%;
+        height: 3rem;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box; /* fixes padding overflowing parent */
+    }
+    .laravel-inner {
+        position: relative;
+        width: calc(100% - 1rem); /* full width minus horizontal margin */
+        /* top | right | bottom | left */
+        margin: 0 auto 0.5rem auto; /* vertical + centered horizontal margin */
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: calc(1rem - 0.25rem);
+        border: 1px solid
+            color-mix(in oklab, var(--bg-lightest) 80%, transparent);
+        background-color: var(--bg-color);
+    }
+    /* test abv */
     main {
         width: 100%;
         overflow: hidden;
@@ -136,10 +183,61 @@
         outline: 2px solid var(--toggle-focus, #2196f3);
     }
 
+    pre {
+        margin-block: 0;
+    }
+
     @media (max-width: 600px) {
         pre {
             max-width: 100vw !important;
             max-height: 70vh !important;
+        }
+
+        .laravel-container {
+            width: 100%;
+            padding: 0 !important;
+            margin: 2rem 0 !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .laravel-outer {
+            position: relative;
+            width: calc(100% - 2rem);
+            /* height: 80%; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+            box-shadow: 0px 0px 0px 10px var(--bg-lightest);
+            /* background-color: var(--bg-color); */
+            background-color: var(--bg-darkest);
+        }
+        .laravel-title {
+            width: 100%;
+            height: 3rem;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box; /* fixes padding overflowing parent */
+        }
+        .laravel-inner {
+            position: relative;
+            width: calc(100% - 1rem); /* full width minus horizontal margin */
+            /* top | right | bottom | left */
+            margin: 0 auto 0.5rem auto; /* vertical + centered horizontal margin */
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: calc(1rem - 0.25rem);
+            border: 1px solid
+                color-mix(in oklab, var(--bg-lightest) 80%, transparent);
+            background-color: var(--bg-color);
         }
     }
 </style>
